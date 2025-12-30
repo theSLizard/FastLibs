@@ -5,6 +5,62 @@ package org.theSLizard;
 public class Main {
     public static void main(String[] args) {
 
+        /// TurboQueue examples ///
+        TurboQueue<String> myQueue = new TurboQueue(20);
+
+        myQueue.write("Hey, you, out there in the cold ");
+        myQueue.write("Getting lonely, getting old ");
+        myQueue.write("Can you feel me? ");
+        myQueue.write("Hey, you, standing in the aisles ");
+        myQueue.write("With itchy feet and fading smiles ");
+        myQueue.write("Can you feel me? ");
+        myQueue.write("Hey, you ");
+        myQueue.write("Don't help them to bury the light ");
+        myQueue.write("Don't give in without a fight ");
+
+        // ---------------------------------------------------
+        // read out
+        String floyd;
+
+        for(;;) {
+            floyd = myQueue.read();
+            if (null != floyd) {
+                System.out.println(floyd);
+            } else {
+                break;
+            }
+        }
+
+        myQueue.write("Hey, you, out there beyond the wall ");
+        myQueue.write("Always doing what you're told ");
+        myQueue.write("Can you help me? ");
+
+        myQueue.write("Hey, you, out there on the road ");
+        myQueue.write("Always doing what you're told ");
+        myQueue.write("Can you help me? ");
+
+        // read out just 3 items
+        System.out.println(myQueue.read());
+        System.out.println(myQueue.read());
+        System.out.println(myQueue.read());
+
+        // and add some more
+        myQueue.write("Hey, you ");
+        myQueue.write("Don't tell me there's no hope at all ");
+        myQueue.write("Together we stand, divided we fall ");
+
+        // ---------------------------------------------------
+        // read out
+        for(;;) {
+            floyd = myQueue.read();
+            if (null != floyd) {
+                System.out.println(floyd);
+            } else {
+                break;
+            }
+        }
+
+        /// FastHashArray examples ///
         FastHashedArray myArray = new FastHashedArray(100);
 
         myArray.addElement(10);
