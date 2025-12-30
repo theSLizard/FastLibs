@@ -44,7 +44,6 @@ public class Main {
 
         System.out.println("-----------------------------------------------------------------");
 
-
         System.out.println("Get element 563563563: " + myArray.findElement(563563563));
         System.out.println("Get element 563563564: " + myArray.findElement(563563564));
         System.out.println("Get element 563563563: " + myArray.findElement(563563563));
@@ -76,6 +75,34 @@ public class Main {
         System.out.println("Get element 16385: " + myArray.findElement(16385));
         System.out.println("Get element 100: " + myArray.findElement(100));
         System.out.println("Get element 102: " + myArray.findElement(102));
+
+        System.out.println("-----------------------------------------------------------------");
+
+        // add elements of other types:
+
+        myArray.addElement("Underneath the bridge, tarp has sprung a leak");
+        myArray.addElement("And the animals I've trapped have all become my pets");
+        myArray.addElement("And I'm living off of grass, and the drippings from my ceiling");
+        myArray.addElement("It's okay to eat fish 'cause they don't have any feelings");
+
+        myArray.printArray();
+        System.out.println("-----------------------------------------------------------------");
+
+        // check for some lyrics:
+        System.out.println("Check for some lyrics");
+        System.out.println("-----------------------");
+        System.out.println("It's okay to eat fish 'cause they don't have any feelings: "
+                +  myArray.findElement("It's okay to eat fish 'cause they don't have any feelings"));
+        System.out.println("Something in the way, yeah, hmm-mmm: "
+                +  myArray.findElement("Something in the way, yeah, hmm-mmm"));
+
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("Delete some lyrics");
+        System.out.println("-------------------");
+        myArray.zapElement("And I'm living off of grass, and the drippings from my ceiling");
+        System.out.println("And I'm living off of grass, and the drippings from my ceiling: "
+                +  myArray.findElement("And I'm living off of grass, and the drippings from my ceiling"));
+
 
     }
 }

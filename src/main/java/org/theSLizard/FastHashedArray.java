@@ -4,28 +4,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class FastHashedArray {
+public class FastHashedArray<T> {
 
-    private Integer backingStoreSize = 0;
-    private List<Element> backingStore = null;
+    private List<Element<T>> backingStore = null;
 
-    private class Element {
-        Integer Key;
+    private class Element<T> {
+        final T Key;
         Boolean isTombstone;
 
-        Element(Integer key, Boolean isTombstone) {
+        Element(T key, Boolean isTombstone) {
             this.isTombstone = isTombstone;
             this.Key = key;
         }
+
+        Element(T key) { this(key, false); }
     }
 
     private Integer calculateHash(Element x) {
-        Integer hash = x.Key % backingStore.size();
+        Integer hash = Math.abs(x.Key.hashCode()) % backingStore.size();
         return hash;
     }
 
-    private Integer calculateHash(Integer x) {
-        Integer hash = x % backingStore.size();
+    private Integer calculateHash(T x) {
+        Integer hash = Math.abs(x.hashCode()) % backingStore.size();
         return hash;
     }
 
@@ -55,7 +56,7 @@ public class FastHashedArray {
         if (null == backingStore) return;
 
         // save old backing store so we can re-distribute it
-        List<Element> oldBackingStore = this.backingStore;
+        List<Element<T>> oldBackingStore = this.backingStore;
 
         // create new backing store
         this.backingStore = new ArrayList<>(Collections.nCopies(newSize, null));
@@ -68,7 +69,7 @@ public class FastHashedArray {
         }
     }
 
-    public void zapElement(Integer x) {
+    public void zapElement(T x) {
         Integer hash = calculateHash(x);
 
         // check if never existed
@@ -88,7 +89,7 @@ public class FastHashedArray {
         }
     }
 
-    public Boolean findElement(Integer x) {
+    public Boolean findElement(T x) {
         Integer hash = calculateHash(x);
 
         // check if never existed
@@ -107,8 +108,8 @@ public class FastHashedArray {
         return false;
     }
 
-    public void addElement(Integer x) {
-        Element newElement = new Element(x, false);
+    public void addElement(T x) {
+        Element newElement = new Element(x);
         Integer hash = this.calculateHash(newElement);
 
         while (null != backingStore.get(hash) && false == backingStore.get(hash).isTombstone) {
